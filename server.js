@@ -23,7 +23,6 @@ const multiparty_upload = function multiparty_upload(req, auto) {
   return new Promise(async (resolve, reject) => {
     await delay()
     new multiparty.Form(config).parse(req, (err, fields, files) => {
-      console.log(fields, files)
       if (err) {
         reject(err)
         return
@@ -46,7 +45,6 @@ app.use((req, res, next) => {
 app.post('/upload_single', async (req, res) => {
   try {
     let { files } = await multiparty_upload(req, true)
-    console.log(files)
     let file = (files.file && files.file[0]) || {}
     res.send({
       code: 0,
